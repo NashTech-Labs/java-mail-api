@@ -9,15 +9,15 @@ import org.slf4j.{Logger, LoggerFactory}
 
 class MailerAPI {
 
+  final val EMPTY_STRING = ""
   val logger: Logger = LoggerFactory.getLogger(this.getClass())
-
   val conf = ConfigFactory.systemEnvironment()
   val senderEmail = try {
     conf.getString("email")
   } catch {
     case ex: Exception =>
       logger.error("Email key not set.\nPlease add email variable using -> export email=your_email@domain.com")
-      ""
+      EMPTY_STRING
   }
 
   val password = try {
@@ -25,7 +25,7 @@ class MailerAPI {
   } catch {
     case ex: Exception =>
       logger.error("Password key not set.\nPlease add password variable using -> export password=your_password")
-      ""
+      EMPTY_STRING
   }
   val hostName = "smtp.gmail.com"
 
